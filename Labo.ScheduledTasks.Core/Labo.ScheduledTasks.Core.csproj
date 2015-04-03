@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{33360828-32AD-4154-8457-58DF82224EE7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Labo.ScheduledTasks.Core</RootNamespace>
+    <AssemblyName>Labo.ScheduledTasks.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AfterTaskEndedEventArgs.cs" />
+    <Compile Include="BeforeTaskStartedEventArgs.cs" />
+    <Compile Include="DefaultDateTimeProvider.cs" />
+    <Compile Include="DefaultTimerFactory.cs" />
+    <Compile Include="IDateTimeProvider.cs" />
+    <Compile Include="IScheduledTaskStorage.cs" />
+    <Compile Include="ITask.cs" />
+    <Compile Include="ITaskCreator.cs" />
+    <Compile Include="ITaskManager.cs" />
+    <Compile Include="ITaskManagerFactory.cs" />
+    <Compile Include="ITaskRunner.cs" />
+    <Compile Include="ITaskService.cs" />
+    <Compile Include="ITimer.cs" />
+    <Compile Include="ITimerFactory.cs" />
+    <Compile Include="Model\ScheduleTask.cs" />
+    <Compile Include="Model\TaskCofiguration.cs" />
+    <Compile Include="Model\TaskContext.cs" />
+    <Compile Include="Model\TaskDefinition.cs" />
+    <Compile Include="OnTaskErrorEventArgs.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemTimersTimer.cs" />
+    <Compile Include="TaskManager.cs" />
+    <Compile Include="TaskRunner.cs" />
+    <Compile Include="TaskService.cs" />
+    <Compile Include="TimerElapsedEventArgs.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

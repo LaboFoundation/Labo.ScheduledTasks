@@ -1,0 +1,11 @@
+C:\Users\boraa\Documents\GitHub\Labo.ScheduledTasks\Labo.ScheduledTasks.Core.Tests\bin\Debug\Labo.ScheduledTasks.Core.Tests.dll
+C:\Users\boraa\Documents\GitHub\Labo.ScheduledTasks\Labo.ScheduledTasks.Core.Tests\bin\Debug\Labo.ScheduledTasks.Core.Tests.pdb
+C:\Users\boraa\Documents\GitHub\Labo.ScheduledTasks\Labo.ScheduledTasks.Core.Tests\bin\Debug\Labo.ScheduledTasks.Core.dll
+C:\Users\boraa\Documents\GitHub\Labo.ScheduledTasks\Labo.ScheduledTasks.Core.Tests\bin\Debug\NSubstitute.dll
+C:\Users\boraa\Documents\GitHub\Labo.ScheduledTasks\Labo.ScheduledTasks.Core.Tests\bin\Debug\nunit.framework.dll
+C:\Users\boraa\Documents\GitHub\Labo.ScheduledTasks\Labo.ScheduledTasks.Core.Tests\bin\Debug\Labo.ScheduledTasks.Core.pdb
+C:\Users\boraa\Documents\GitHub\Labo.ScheduledTasks\Labo.ScheduledTasks.Core.Tests\bin\Debug\NSubstitute.xml
+C:\Users\boraa\Documents\GitHub\Labo.ScheduledTasks\Labo.ScheduledTasks.Core.Tests\bin\Debug\nunit.framework.xml
+C:\Users\boraa\Documents\GitHub\Labo.ScheduledTasks\Labo.ScheduledTasks.Core.Tests\obj\Debug\Labo.ScheduledTasks.Core.Tests.csprojResolveAssemblyReference.cache
+C:\Users\boraa\Documents\GitHub\Labo.ScheduledTasks\Labo.ScheduledTasks.Core.Tests\obj\Debug\Labo.ScheduledTasks.Core.Tests.dll
+C:\Users\boraa\Documents\GitHub\Labo.ScheduledTasks\Labo.ScheduledTasks.Core.Tests\obj\Debug\Labo.ScheduledTasks.Core.Tests.pdb
