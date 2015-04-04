@@ -3,6 +3,8 @@
     using System;
     using System.Timers;
 
+    using Labo.ScheduledTasks.Core.EventArgs;
+
     public sealed class SystemTimersTimer : ITimer
     {
         /// <summary>

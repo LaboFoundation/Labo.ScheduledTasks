@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
 
+    using Labo.ScheduledTasks.Core.EventArgs;
     using Labo.ScheduledTasks.Core.Model;
 
     public sealed class TaskService : ITaskService

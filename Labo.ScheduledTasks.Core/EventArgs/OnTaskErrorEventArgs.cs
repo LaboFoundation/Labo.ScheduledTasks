@@ -1,4 +1,4 @@
-﻿namespace Labo.ScheduledTasks.Core
+﻿namespace Labo.ScheduledTasks.Core.EventArgs
 {
     using System;
 

@@ -2,6 +2,8 @@
 {
     using System;
 
+    using Labo.ScheduledTasks.Core.EventArgs;
+
     /// <summary>
     /// The task runner that runs the task with the specified interval.
     /// </summary>

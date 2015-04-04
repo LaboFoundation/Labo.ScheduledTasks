@@ -5,6 +5,7 @@
     using System.Threading;
 
     using Labo.ScheduledTasks.Core;
+    using Labo.ScheduledTasks.Core.EventArgs;
 
     using NSubstitute;
 

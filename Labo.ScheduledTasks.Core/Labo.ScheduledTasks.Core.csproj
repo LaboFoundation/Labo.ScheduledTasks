@@ -39,8 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AfterTaskEndedEventArgs.cs" />
-    <Compile Include="BeforeTaskStartedEventArgs.cs" />
+    <Compile Include="DefaultTaskManagerFactory.cs" />
+    <Compile Include="EventArgs\AfterTaskEndedEventArgs.cs" />
+    <Compile Include="EventArgs\BeforeTaskStartedEventArgs.cs" />
     <Compile Include="DefaultDateTimeProvider.cs" />
     <Compile Include="DefaultTimerFactory.cs" />
     <Compile Include="IDateTimeProvider.cs" />
@@ -57,13 +58,14 @@
     <Compile Include="Model\TaskCofiguration.cs" />
     <Compile Include="Model\TaskContext.cs" />
     <Compile Include="Model\TaskDefinition.cs" />
-    <Compile Include="OnTaskErrorEventArgs.cs" />
+    <Compile Include="EventArgs\OnTaskErrorEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReflectionTaskCreator.cs" />
     <Compile Include="SystemTimersTimer.cs" />
     <Compile Include="TaskManager.cs" />
     <Compile Include="TaskRunner.cs" />
     <Compile Include="TaskService.cs" />
-    <Compile Include="TimerElapsedEventArgs.cs" />
+    <Compile Include="EventArgs\TimerElapsedEventArgs.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

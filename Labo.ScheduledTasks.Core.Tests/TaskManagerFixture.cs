@@ -1,8 +1,11 @@
 ﻿namespace Labo.ScheduledTasks.Core.Tests
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq.Expressions;
 
     using Labo.ScheduledTasks.Core;
+    using Labo.ScheduledTasks.Core.EventArgs;
     using Labo.ScheduledTasks.Core.Model;
 
     using NSubstitute;
@@ -47,6 +50,58 @@
             taskManager.Start();
 
             timer.Received(1).Start();
+        }
+
+        private sealed class TimerStub : ITimer
+        {
+            private readonly DateTime m_SignalTime;
+
+            public event EventHandler<TimerElapsedEventArgs> Elapsed = delegate { };
+
+            public double Interval { get; private set; }
+
+            public TimerStub(DateTime signalTime)
+            {
+                m_SignalTime = signalTime;
+            }
+
+            public void Start()
+            {
+                Elapsed(this, new TimerElapsedEventArgs(m_SignalTime));
+            }
+
+            public void Stop()
+            {
+            }
+
+            public void Dispose()
+            {
+            }
+        }
+
+        [Test]
+        public void OnTaskError_TaskManagerOnTaskErrorEventMustBeCalled()
+        {
+            Exception exception = new Exception();
+
+            IDateTimeProvider dateTimeProvider = Substitute.For<IDateTimeProvider>();
+
+            TaskCofiguration taskCofiguration = new TaskCofiguration(1, "Task1", 10, true, true, false);
+            ITask task = Substitute.For<ITask>();
+            task.WhenForAnyArgs(x => x.Run()).Do(
+                x =>
+                    {
+                        throw exception;
+                    });
+            ITimerFactory timerFactory = Substitute.For<ITimerFactory>();
+            ITimer timer = new TimerStub(DateTime.UtcNow);
+            timerFactory.CreateTimer(1).ReturnsForAnyArgs(timer);
+
+            TaskDefinition taskDefinition = new TaskDefinition(task, taskCofiguration);
+            TaskManager taskManager = new TaskManager(new List<TaskDefinition> { taskDefinition }, timerFactory, dateTimeProvider);
+            taskManager.OnTaskError += (sender, args) => Assert.AreEqual(exception, args.Error);
+            
+            taskManager.Start();
         }
 
         [Test]

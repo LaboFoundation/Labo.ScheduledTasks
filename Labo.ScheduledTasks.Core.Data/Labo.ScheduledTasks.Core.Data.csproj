@@ -30,6 +30,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Labo.Common">
+      <HintPath>..\packages\Labo.Commons.0.1.7\lib\net45\Labo.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Labo.Common.Data">
+      <HintPath>..\packages\Labo.Commons.Data.0.2.0\lib\net45\Labo.Common.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Labo.Common.DomainModel">
+      <HintPath>..\packages\Labo.Commons.DomainModel.0.1.0\lib\net45\Labo.Common.DomainModel.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,7 +48,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DbScheduledTaskStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Labo.ScheduledTasks.Core\Labo.ScheduledTasks.Core.csproj">
+      <Project>{33360828-32ad-4154-8457-58df82224ee7}</Project>
+      <Name>Labo.ScheduledTasks.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

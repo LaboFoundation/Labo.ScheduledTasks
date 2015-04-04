@@ -2,6 +2,8 @@
 {
     using System;
 
+    using Labo.ScheduledTasks.Core.EventArgs;
+
     public interface ITaskManager : IDisposable
     {
         /// <summary>
