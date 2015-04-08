@@ -1,6 +1,7 @@
 ﻿namespace Labo.ScheduledTasks.Core
 {
     using System;
+    using System.Collections.Generic;
 
     using Labo.ScheduledTasks.Core.EventArgs;
 
@@ -20,6 +21,14 @@
         /// Occurs when [configuration task error].
         /// </summary>
         event EventHandler<OnTaskErrorEventArgs> OnTaskError;
+
+        /// <summary>
+        /// Gets the task runner information list.
+        /// </summary>
+        /// <value>
+        /// The task runner information list.
+        /// </value>
+        IList<ITaskRunnerInfo> TaskRunnerInfos { get; }
 
         /// <summary>
         /// Starts the task manager

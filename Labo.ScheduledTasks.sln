@@ -7,6 +7,23 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Labo.ScheduledTasks.Core.Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Labo.ScheduledTasks.Core.Tests", "Labo.ScheduledTasks.Core.Tests\Labo.ScheduledTasks.Core.Tests.csproj", "{A72B88B9-F955-4D3D-9C45-DF2ED0D2494D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Labo.ScheduledTasks.Admin.UI", "Labo.ScheduledTasks.Admin.UI\Labo.ScheduledTasks.Admin.UI.csproj", "{1D0C6BA9-48A4-4948-A124-7531C1D3302E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Labo.ScheduledTasks.Admin.Core", "Labo.ScheduledTasks.Admin.Core\Labo.ScheduledTasks.Admin.Core.csproj", "{FE7C0C01-3D80-4CAD-99D6-C2FBC426984E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Labo.ScheduledTasks.Admin.Presentation", "Labo.ScheduledTasks.Admin.Presentation\Labo.ScheduledTasks.Admin.Presentation.csproj", "{B2C09B55-7D91-4DCB-BC6A-914107D413D9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{FCC9EB92-F1BD-48E6-A2D5-6BE258AE5C59}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{5729D018-1896-451C-BCA5-FAF36C819186}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Labo.ScheduledTasks.Core.Data.EntityFramework", "Labo.ScheduledTasks.Core.Data.EntityFramework\Labo.ScheduledTasks.Core.Data.EntityFramework.csproj", "{74F87B1F-71A1-4D95-8AA2-38912DCEBAC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,8 +42,27 @@ Global
 		{A72B88B9-F955-4D3D-9C45-DF2ED0D2494D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A72B88B9-F955-4D3D-9C45-DF2ED0D2494D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A72B88B9-F955-4D3D-9C45-DF2ED0D2494D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D0C6BA9-48A4-4948-A124-7531C1D3302E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D0C6BA9-48A4-4948-A124-7531C1D3302E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D0C6BA9-48A4-4948-A124-7531C1D3302E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D0C6BA9-48A4-4948-A124-7531C1D3302E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE7C0C01-3D80-4CAD-99D6-C2FBC426984E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE7C0C01-3D80-4CAD-99D6-C2FBC426984E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE7C0C01-3D80-4CAD-99D6-C2FBC426984E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE7C0C01-3D80-4CAD-99D6-C2FBC426984E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2C09B55-7D91-4DCB-BC6A-914107D413D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2C09B55-7D91-4DCB-BC6A-914107D413D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2C09B55-7D91-4DCB-BC6A-914107D413D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2C09B55-7D91-4DCB-BC6A-914107D413D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74F87B1F-71A1-4D95-8AA2-38912DCEBAC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74F87B1F-71A1-4D95-8AA2-38912DCEBAC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74F87B1F-71A1-4D95-8AA2-38912DCEBAC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74F87B1F-71A1-4D95-8AA2-38912DCEBAC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A72B88B9-F955-4D3D-9C45-DF2ED0D2494D} = {FCC9EB92-F1BD-48E6-A2D5-6BE258AE5C59}
 	EndGlobalSection
 EndGlobal

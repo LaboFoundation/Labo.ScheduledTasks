@@ -1,23 +1,21 @@
 ﻿namespace Labo.ScheduledTasks.Core
 {
     using System;
-    using System.Collections.Generic;
 
+    using Labo.ScheduledTasks.Core.Configuration;
     using Labo.ScheduledTasks.Core.Model;
 
-    public interface IScheduledTaskStorage
+    public interface IScheduledTaskStorage : IScheduledTaskConfiguration
     {
         void DeleteTask(int taskId);
 
-        ScheduleTask GetTaskById(int taskId);
+        ScheduledTask GetTaskById(int taskId);
 
-        ScheduleTask GetTaskByType(string type);
+        ScheduledTask GetTaskByType(string type);
 
-        IList<ScheduleTask> GetAllTasks();
+        void InsertTask(ScheduledTask task);
 
-        void InsertTask(ScheduleTask task);
-
-        void UpdateTask(ScheduleTask task);
+        void UpdateTask(ScheduledTask task);
 
         void UpdateStartDate(int taskId, DateTime startDateUtc);
 

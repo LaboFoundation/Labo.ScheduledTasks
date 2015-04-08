@@ -77,12 +77,12 @@
 
         private IList<TaskDefinition> GetTaskDefinitions()
         {
-            IList<ScheduleTask> scheduleTasks = m_ScheduledTaskStorage.GetAllTasks();
+            IList<ScheduledTask> scheduleTasks = m_ScheduledTaskStorage.GetAllTasks();
             IList<TaskDefinition> taskDefinitions = new List<TaskDefinition>();
 
             for (int i = 0; i < scheduleTasks.Count; i++)
             {
-                ScheduleTask scheduleTask = scheduleTasks[i];
+                ScheduledTask scheduleTask = scheduleTasks[i];
                 ITask task = m_TaskCreator.CreateTask(scheduleTask.Type);
                 taskDefinitions.Add(new TaskDefinition(task, new TaskCofiguration(scheduleTask.Id, scheduleTask.Name, scheduleTask.Seconds, scheduleTask.StopOnError, scheduleTask.Enabled, scheduleTask.RunOnlyOnce)));
             }

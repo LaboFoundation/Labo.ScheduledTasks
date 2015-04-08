@@ -3,7 +3,7 @@ namespace Labo.ScheduledTasks.Core.Model
     using System;
 
     [Serializable]
-    public sealed class ScheduleTask
+    public sealed class ScheduledTask
     {
         /// <summary>
         /// Gets or sets the unique identifier.

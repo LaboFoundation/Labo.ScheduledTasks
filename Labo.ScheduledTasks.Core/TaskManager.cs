@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     using Labo.ScheduledTasks.Core.EventArgs;
     using Labo.ScheduledTasks.Core.Model;
@@ -27,6 +28,20 @@
         /// The disposed
         /// </summary>
         private bool m_Disposed;
+
+        /// <summary>
+        /// Gets the task runner information list.
+        /// </summary>
+        /// <value>
+        /// The task runner information list.
+        /// </value>
+        public IList<ITaskRunnerInfo> TaskRunnerInfos
+        {
+            get
+            {
+                return m_TaskRunners.Cast<ITaskRunnerInfo>().ToList().AsReadOnly();
+            }
+        }
 
         /// <summary>
         /// Gets the task runners.
@@ -93,41 +108,6 @@
             InitTaskRunner(taskDefinitions);
         }
 
-        private void InitTaskRunner(IList<TaskDefinition> taskDefinitions)
-        {
-            m_TaskRunners = new List<ITaskRunner>(taskDefinitions.Count);
-
-            for (int i = 0; i < taskDefinitions.Count; i++)
-            {
-                TaskDefinition taskDefinition = taskDefinitions[i];
-                TaskCofiguration taskCofiguration = taskDefinition.Configuration;
-                ITimer timer = m_TimerFactory.CreateTimer(taskCofiguration.Seconds * 1000);
-
-                ITaskRunner taskRunner = new TaskRunner(taskDefinition.Task, taskCofiguration.TaskId, m_DateTimeProvider, timer, taskCofiguration.Enabled, taskCofiguration.StopOnError, taskCofiguration.RunOnlyOnce);
-                
-                taskRunner.OnTaskError += TaskRunnerOnTaskError;
-                taskRunner.AfterTaskEnded += TaskRunnerAfterTaskEnded;
-                taskRunner.BeforeTaskStarted += TaskRunnerBeforeTaskStarted;
-
-                TaskRunners.Add(taskRunner);
-            }
-        }
-
-        private void TaskRunnerBeforeTaskStarted(object sender, BeforeTaskStartedEventArgs e)
-        {
-            BeforeTaskStarted(sender, e);
-        }
-
-        private void TaskRunnerAfterTaskEnded(object sender, AfterTaskEndedEventArgs e)
-        {
-            AfterTaskEnded(sender, e);
-        }
-
-        private void TaskRunnerOnTaskError(object sender, OnTaskErrorEventArgs e)
-        {
-            OnTaskError(sender, e);
-        }
-
         /// <summary>
         /// Finalizes an instance of the <see cref="TaskManager"/> class.
         /// </summary>
@@ -168,6 +148,41 @@
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        private void InitTaskRunner(IList<TaskDefinition> taskDefinitions)
+        {
+            m_TaskRunners = new List<ITaskRunner>(taskDefinitions.Count);
+
+            for (int i = 0; i < taskDefinitions.Count; i++)
+            {
+                TaskDefinition taskDefinition = taskDefinitions[i];
+                TaskCofiguration taskCofiguration = taskDefinition.Configuration;
+                ITimer timer = m_TimerFactory.CreateTimer(taskCofiguration.Seconds * 1000);
+
+                ITaskRunner taskRunner = new TaskRunner(taskDefinition.Task, taskCofiguration.TaskId, m_DateTimeProvider, timer, taskCofiguration.Enabled, taskCofiguration.StopOnError, taskCofiguration.RunOnlyOnce);
+
+                taskRunner.OnTaskError += TaskRunnerOnTaskError;
+                taskRunner.AfterTaskEnded += TaskRunnerAfterTaskEnded;
+                taskRunner.BeforeTaskStarted += TaskRunnerBeforeTaskStarted;
+
+                TaskRunners.Add(taskRunner);
+            }
+        }
+
+        private void TaskRunnerBeforeTaskStarted(object sender, BeforeTaskStartedEventArgs e)
+        {
+            BeforeTaskStarted(sender, e);
+        }
+
+        private void TaskRunnerAfterTaskEnded(object sender, AfterTaskEndedEventArgs e)
+        {
+            AfterTaskEnded(sender, e);
+        }
+
+        private void TaskRunnerOnTaskError(object sender, OnTaskErrorEventArgs e)
+        {
+            OnTaskError(sender, e);
         }
 
         /// <summary>
