@@ -1,5 +1,0 @@
-C:\Users\boraa\Documents\GitHub\Labo.ScheduledTasks\Labo.ScheduledTasks.Core\obj\Debug\Labo.ScheduledTasks.Core.csprojResolveAssemblyReference.cache
-C:\Users\boraa\Documents\GitHub\Labo.ScheduledTasks\Labo.ScheduledTasks.Core\bin\Debug\Labo.ScheduledTasks.Core.dll
-C:\Users\boraa\Documents\GitHub\Labo.ScheduledTasks\Labo.ScheduledTasks.Core\bin\Debug\Labo.ScheduledTasks.Core.pdb
-C:\Users\boraa\Documents\GitHub\Labo.ScheduledTasks\Labo.ScheduledTasks.Core\obj\Debug\Labo.ScheduledTasks.Core.dll
-C:\Users\boraa\Documents\GitHub\Labo.ScheduledTasks\Labo.ScheduledTasks.Core\obj\Debug\Labo.ScheduledTasks.Core.pdb
