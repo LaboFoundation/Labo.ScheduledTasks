@@ -1,5 +1,6 @@
 ﻿namespace Labo.ScheduledTasks.Core.Data.EntityFramework.Mapping
 {
+    using System;
     using System.Data.Entity.ModelConfiguration;
 
     using Labo.ScheduledTasks.Core.Model;
@@ -21,10 +22,12 @@
             Property(t => t.LastStartUtc).HasColumnName("LastStartUtc");
             Property(t => t.LastSuccessUtc).HasColumnName("LastSuccessUtc");
             Property(t => t.Name).HasColumnName("Name").IsRequired().IsUnicode(false).HasMaxLength(50);
+            Property(t => t.Description).HasColumnName("Description").IsUnicode(false).HasMaxLength(300);
+            Property(t => t.Configuration).HasColumnName("Configuration").IsRequired().IsUnicode(false);
             Property(t => t.RunOnlyOnce).HasColumnName("RunOnlyOnce").IsRequired();
             Property(t => t.Seconds).HasColumnName("Seconds").IsRequired();
             Property(t => t.StopOnError).HasColumnName("StopOnError").IsRequired();
-            Property(t => t.Type).HasColumnName("Type").IsRequired().IsUnicode(false).HasMaxLength(1000);
+            Property(t => t.Type).HasColumnName("Type").IsRequired().IsUnicode(false).HasMaxLength(50);
             
         }
     }

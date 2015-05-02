@@ -22,6 +22,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>..\CodeAnalysisRules\Common.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,6 +32,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>..\CodeAnalysisRules\Common.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Labo.Common, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -41,7 +45,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Labo.Mvp.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Labo.Mvp.Core.1.0.1\lib\net45\Labo.Mvp.Core.dll</HintPath>
+      <HintPath>..\packages\Labo.Mvp.Core.1.0.2\lib\net45\Labo.Mvp.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -53,11 +57,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Presenters\EditTaskPresenter.cs" />
     <Compile Include="Presenters\TaskListPresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScheduledTasksAdminPresentationModule.cs" />
-    <Compile Include="Views\IEditTaskView.cs" />
     <Compile Include="Views\ITaskListView.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +69,10 @@
     <ProjectReference Include="..\Labo.ScheduledTasks.Admin.Core\Labo.ScheduledTasks.Admin.Core.csproj">
       <Project>{fe7c0c01-3d80-4cad-99d6-c2fbc426984e}</Project>
       <Name>Labo.ScheduledTasks.Admin.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Labo.ScheduledTasks.Core.Presentation\Labo.ScheduledTasks.Core.Presentation.csproj">
+      <Project>{BF2FAAA6-A692-48EF-91FD-9C4BE1A9DE97}</Project>
+      <Name>Labo.ScheduledTasks.Core.Presentation</Name>
     </ProjectReference>
     <ProjectReference Include="..\Labo.ScheduledTasks.Core\Labo.ScheduledTasks.Core.csproj">
       <Project>{33360828-32AD-4154-8457-58DF82224EE7}</Project>

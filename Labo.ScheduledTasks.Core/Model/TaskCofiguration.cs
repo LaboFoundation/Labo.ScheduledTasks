@@ -66,17 +66,17 @@
         {
             if (taskId < 1)
             {
-                throw new ArgumentOutOfRangeException("taskId cannot be smaller than 1.");
+                throw new ArgumentOutOfRangeException("taskId", "taskId cannot be smaller than 1.");
             }
 
             if (seconds < 1)
             {
-                throw new ArgumentOutOfRangeException("seconds cannot be smaller than 1.");
+                throw new ArgumentOutOfRangeException("seconds", "seconds cannot be smaller than 1.");
             }
 
             if (string.IsNullOrWhiteSpace(taskName))
             {
-                throw new ArgumentOutOfRangeException("taskName cannot be null.");
+                throw new ArgumentOutOfRangeException("taskName", "taskName cannot be null.");
             }
 
             TaskId = taskId;

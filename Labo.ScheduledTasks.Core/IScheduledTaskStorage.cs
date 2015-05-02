@@ -11,7 +11,7 @@
 
         ScheduledTask GetTaskById(int taskId);
 
-        ScheduledTask GetTaskByType(string type);
+        ScheduledTask GetTaskByName(string name);
 
         void InsertTask(ScheduledTask task);
 

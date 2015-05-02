@@ -61,15 +61,15 @@
         }
 
         /// <summary>
-        /// Gets the type of the task by.
+        /// Gets the task by task name.
         /// </summary>
-        /// <param name="type">The type.</param>
+        /// <param name="name">The tasj name.</param>
         /// <returns>Scheduled task.</returns>
-        public ScheduledTask GetTaskByType(string type)
+        public ScheduledTask GetTaskByName(string name)
         {
             using (ISessionScope sessionScope = m_SessionScopeProvider.CreateSessionScope())
             {
-                return sessionScope.GetRepository<ScheduledTask>().Query().SingleOrDefault(x => x.Type == type);
+                return sessionScope.GetRepository<ScheduledTask>().Query().SingleOrDefault(x => x.Name == name);
             }
         }
 
@@ -121,10 +121,12 @@
                         x => x.Id,
                         x => x.Enabled,
                         x => x.Name,
+                        x => x.Description,
                         x => x.RunOnlyOnce,
                         x => x.Seconds,
                         x => x.StopOnError,
-                        x => x.Type);
+                        x => x.Type,
+                        x => x.Configuration);
 
                 sessionScope.Complete();
             }
@@ -188,11 +190,6 @@
         /// </exception>
         private static void ValidateTask(IRepository<ScheduledTask> repository, ScheduledTask task)
         {
-            if (repository.Query().Any(x => x.Type == task.Type && x.Id != task.Id))
-            {
-                throw new UserLevelException(string.Format(CultureInfo.CurrentCulture, "Task with type '{0}' already exists.", task.Type));
-            }
-
             if (repository.Query().Any(x => x.Name == task.Name && x.Id != task.Id))
             {
                 throw new UserLevelException(string.Format(CultureInfo.CurrentCulture, "Task with name '{0}' already exists.", task.Type));

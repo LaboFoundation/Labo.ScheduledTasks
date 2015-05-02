@@ -10,8 +10,6 @@
     {
         static ScheduledTasksDbContext()
         {
-            // Database.SetInitializer(new CreateDatabaseIfNotExists<ScheduledTasksDbContext>());
-
             Database.SetInitializer<ScheduledTasksDbContext>(null);
         }
 

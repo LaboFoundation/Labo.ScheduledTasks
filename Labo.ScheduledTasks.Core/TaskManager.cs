@@ -30,6 +30,11 @@
         private bool m_Disposed;
 
         /// <summary>
+        /// The is running
+        /// </summary>
+        private bool m_IsRunning;
+
+        /// <summary>
         /// Gets the task runner information list.
         /// </summary>
         /// <value>
@@ -40,6 +45,20 @@
             get
             {
                 return m_TaskRunners.Cast<ITaskRunnerInfo>().ToList().AsReadOnly();
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether the task manager [is running].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if the task manager [is running]; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsRunning
+        {
+            get
+            {
+                return m_IsRunning;
             }
         }
 
@@ -58,14 +77,14 @@
         }
 
         /// <summary>
-        /// Occurs when [before task started].
+        /// Occurs when [task is starting].
         /// </summary>
-        public event EventHandler<BeforeTaskStartedEventArgs> BeforeTaskStarted = delegate { };
+        public event EventHandler<BeforeTaskStartedEventArgs> TaskStarting = delegate { };
 
         /// <summary>
-        /// Occurs when [after task ended].
+        /// Occurs when [task is ended].
         /// </summary>
-        public event EventHandler<AfterTaskEndedEventArgs> AfterTaskEnded = delegate { };
+        public event EventHandler<AfterTaskEndedEventArgs> TaskEnded = delegate { };
 
         /// <summary>
         /// Occurs when [configuration task error].
@@ -126,6 +145,8 @@
                 ITaskRunner taskRunner = TaskRunners[i];
                 taskRunner.Start();
             }
+
+            m_IsRunning = true;
         }
 
         /// <summary>
@@ -138,6 +159,8 @@
                 ITaskRunner taskRunner = TaskRunners[i];
                 taskRunner.Stop();
             }
+
+            m_IsRunning = false;
         }
 
         /// <summary>
@@ -150,6 +173,7 @@
             GC.SuppressFinalize(this);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
         private void InitTaskRunner(IList<TaskDefinition> taskDefinitions)
         {
             m_TaskRunners = new List<ITaskRunner>(taskDefinitions.Count);
@@ -163,8 +187,8 @@
                 ITaskRunner taskRunner = new TaskRunner(taskDefinition.Task, taskCofiguration.TaskId, m_DateTimeProvider, timer, taskCofiguration.Enabled, taskCofiguration.StopOnError, taskCofiguration.RunOnlyOnce);
 
                 taskRunner.OnTaskError += TaskRunnerOnTaskError;
-                taskRunner.AfterTaskEnded += TaskRunnerAfterTaskEnded;
-                taskRunner.BeforeTaskStarted += TaskRunnerBeforeTaskStarted;
+                taskRunner.TaskEnded += TaskRunnerAfterTaskEnded;
+                taskRunner.TaskStarting += TaskRunnerBeforeTaskStarted;
 
                 TaskRunners.Add(taskRunner);
             }
@@ -172,12 +196,12 @@
 
         private void TaskRunnerBeforeTaskStarted(object sender, BeforeTaskStartedEventArgs e)
         {
-            BeforeTaskStarted(sender, e);
+            TaskStarting(sender, e);
         }
 
         private void TaskRunnerAfterTaskEnded(object sender, AfterTaskEndedEventArgs e)
         {
-            AfterTaskEnded(sender, e);
+            TaskEnded(sender, e);
         }
 
         private void TaskRunnerOnTaskError(object sender, OnTaskErrorEventArgs e)
@@ -211,6 +235,7 @@
                 }
                 finally
                 {
+                    m_IsRunning = false;
                     m_Disposed = true;
                 }
             }

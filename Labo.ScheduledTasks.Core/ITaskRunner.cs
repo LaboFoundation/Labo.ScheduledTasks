@@ -10,14 +10,14 @@
     public interface ITaskRunner : IDisposable, ITaskRunnerInfo
     {
         /// <summary>
-        /// Occurs when [before task started].
+        /// Occurs when [task is starting].
         /// </summary>
-        event EventHandler<BeforeTaskStartedEventArgs> BeforeTaskStarted;
+        event EventHandler<BeforeTaskStartedEventArgs> TaskStarting;
 
         /// <summary>
-        /// Occurs when [after task ended].
+        /// Occurs when [task is ended].
         /// </summary>
-        event EventHandler<AfterTaskEndedEventArgs> AfterTaskEnded;
+        event EventHandler<AfterTaskEndedEventArgs> TaskEnded;
 
         /// <summary>
         /// Occurs when [configuration task error].
@@ -32,6 +32,7 @@
         /// <summary>
         /// Stops the task runner.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Stop")]
         void Stop();
     }
 }

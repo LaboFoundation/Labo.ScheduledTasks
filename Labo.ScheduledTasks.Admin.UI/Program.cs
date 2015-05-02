@@ -6,8 +6,13 @@
     using Labo.Common.Ioc;
     using Labo.Mvp.Core;
     using Labo.Mvp.Core.Menu;
+    using Labo.Mvp.Core.Navigator;
+    using Labo.Mvp.Core.Presenter;
+    using Labo.Mvp.Core.View;
     using Labo.Mvp.WinForms;
     using Labo.ScheduledTasks.Admin.Presentation.Views;
+    using Labo.ScheduledTasks.Core.Presentation.Configuration;
+    using Labo.ScheduledTasks.Core.Presentation.Configuration.Views;
 
     static class Program
     {
@@ -20,33 +25,39 @@
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            RegisterModules();
-            RegisterNavigator();
+            Common.Ioc.Container.IocContainer iocContainer = new Common.Ioc.Container.IocContainer();
+            iocContainer.RegisterSingleInstance<IIocContainer>(x => iocContainer);
+            IocContainer.RegisterIocContainerImplementation(iocContainer);
+
+            RegisterModules(iocContainer);
             RegisterViews();
 
-            OpenMainView();
+            iocContainer.RegisterSingleInstance(x => MvpApplication.ViewManager);
+            iocContainer.RegisterSingleInstance(x => MvpApplication.PresenterFactory);
+            iocContainer.RegisterSingleInstance<INavigator>(x => new WinFormsNavigator(x.GetInstance<IViewManager>(), MvpApplication.ViewActivator, x.GetInstance<IPresenterFactory>()));
+            iocContainer.RegisterSingleInstance<ITaskCreatorConfigurationViewFactory>(x => new TaskCreatorConfigurationViewFactory(x.GetInstance<IPresenterFactory>(), x.GetInstance<INavigator>()));
+
+            OpenMainView(iocContainer);
         }
 
-        private static void RegisterNavigator()
-        {
-            MvpApplication.SetNavigator(new WinFormsNavigator(MvpApplication.ViewManager, MvpApplication.ViewActivator, MvpApplication.PresenterFactory));
-        }
-
-        private static void OpenMainView()
+        private static void OpenMainView(IIocContainer iocContainer)
         {
             MvpApplication.PresenterFactory.RegisterPresenter<IMainScreenView, MainScreenPresenter>();
             MvpApplication.ViewManager.RegisterView<IMainScreenView, MainScreenForm>("Main", "Labo Scheduled Tasks Admin UI");
+
+            MvpApplication.SetNavigator(iocContainer.GetInstance<INavigator>());
+
             IMainScreenView mainScreenView =
                 MvpApplication.Navigator.GetView<IMainScreenView>(
                     new MenuItemCollection
                         {
-                            new Labo.Mvp.Core.Menu.MenuItem("Tasks")
+                            new Mvp.Core.Menu.MenuItem("Tasks")
                                 {
                                     Children =
                                         new MenuItemCollection
                                             {
-                                                new Labo.Mvp.Core.Menu.MenuItem("Add New Task", "SaveTask"),
-                                                new Labo.Mvp.Core.Menu.MenuItem("Task List", "TaskList")
+                                                new Mvp.Core.Menu.MenuItem("Add New Task", "SaveTask"),
+                                                new Mvp.Core.Menu.MenuItem("Task List", "TaskList")
                                             }
                                 }
                         });
@@ -57,19 +68,18 @@
             Application.Run(mainForm);
         }
 
-        private static void RegisterModules()
+        private static void RegisterModules(IIocContainer iocContainer)
         {
-            Labo.Common.Ioc.Container.IocContainer iocContainer = new Labo.Common.Ioc.Container.IocContainer();
-            iocContainer.RegisterSingleInstance<IIocContainer>(x => iocContainer);
-            IocContainer.RegisterIocContainerImplementation(iocContainer);
-
             iocContainer.RegisterModule(new ScheduledTasksAdminUIModule());
         }
 
         private static void RegisterViews()
         {
-            MvpApplication.ViewManager.RegisterView<IEditTaskView, EditTaskForm>("SaveTask", "Save Task");
-            MvpApplication.ViewManager.RegisterView<ITaskListView, TaskListForm>("TaskList", "Task List");
+            IViewManager viewManager = MvpApplication.ViewManager;
+            viewManager.RegisterView<IEditTaskView, EditTaskForm>("SaveTask", "Save Task");
+            viewManager.RegisterView<ITaskListView, TaskListForm>("TaskList", "Task List");
+            viewManager.RegisterView<IStartProcessTaskCreatorConfigurationView, StartProcessTaskCreatorConfigurationForm>("StartProcessTaskConfiguration", "Start Process Task Configuration");
+            viewManager.RegisterView<IReflectionTaskCreatorConfigurationView, ReflectionTaskCreatorConfigurationForm>("ReflectionTaskConfiguration", "Reflection Task Configuration");
         }
     }
 }

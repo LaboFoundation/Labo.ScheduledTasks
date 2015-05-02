@@ -274,7 +274,7 @@
             TimerStub timer = new TimerStub(utcNow, 1000);
 
             TaskRunner taskRunner = new TaskRunner(task, 1, dateTimeProvider, timer, true, false, false);
-            taskRunner.BeforeTaskStarted += (sender, args) =>
+            taskRunner.TaskStarting += (sender, args) =>
                 {
                     Assert.IsFalse(timer.IsRunning);
                     Assert.IsTrue(timer.Stoped);
@@ -293,7 +293,7 @@
             TimerStub timer = new TimerStub(utcNow, 1000);
 
             TaskRunner taskRunner = new TaskRunner(task, 1, dateTimeProvider, timer, true, false, false);
-            taskRunner.BeforeTaskStarted += (sender, args) =>
+            taskRunner.TaskStarting += (sender, args) =>
             {
                 Assert.IsFalse(taskRunner.IsRunning);
             };
@@ -311,7 +311,7 @@
             TimerStub timer = new TimerStub(utcNow, 1000);
 
             TaskRunner taskRunner = new TaskRunner(task, 1, dateTimeProvider, timer, true, false, false);
-            taskRunner.BeforeTaskStarted += (sender, args) =>
+            taskRunner.TaskStarting += (sender, args) =>
             {
                 Assert.AreEqual(utcNow, args.SignalTime);
             };
@@ -344,9 +344,11 @@
                 };
             taskRunner.Start();
 
-            if (!hasError)
+            Stopwatch sw = Stopwatch.StartNew();
+            const int timeout = 10 * 1000;
+            while (!hasError && sw.ElapsedMilliseconds < timeout)
             {
-                Thread.Sleep(1000);
+                Thread.Sleep(100);
             }
 
             Assert.IsFalse(taskRunner.Enabled);

@@ -147,12 +147,12 @@
         /// <summary>
         /// Occurs when [before task started].
         /// </summary>
-        public event EventHandler<BeforeTaskStartedEventArgs> BeforeTaskStarted = delegate { };
+        public event EventHandler<BeforeTaskStartedEventArgs> TaskStarting = delegate { };
 
         /// <summary>
         /// Occurs when [after task ended].
         /// </summary>
-        public event EventHandler<AfterTaskEndedEventArgs> AfterTaskEnded = delegate { };
+        public event EventHandler<AfterTaskEndedEventArgs> TaskEnded = delegate { };
 
         /// <summary>
         /// Occurs when [configuration task error].
@@ -180,7 +180,7 @@
 
             if (taskId < 1)
             {
-                throw new ArgumentOutOfRangeException("taskId cannot be smaller than 1.");
+                throw new ArgumentOutOfRangeException("taskId", "taskId cannot be smaller than 1.");
             }
 
             if (dateTimeProvider == null)
@@ -229,6 +229,8 @@
         public void Stop()
         {
             m_Timer.Stop();
+
+            IsRunning = false;
         }
 
         /// <summary>
@@ -245,6 +247,7 @@
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="e">The <see cref="TimerElapsedEventArgs"/> instance containing the event data.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         private void TimerElapsed(object sender, TimerElapsedEventArgs e)
         {
             if (!Enabled)
@@ -258,7 +261,7 @@
 
                 SignalTime = e.SignalTime;
 
-                BeforeTaskStarted(this, new BeforeTaskStartedEventArgs(TaskId, SignalTime.GetValueOrDefault()));
+                TaskStarting(this, new BeforeTaskStartedEventArgs(TaskId, SignalTime.GetValueOrDefault()));
 
                 LastStartDateUtc = m_DateTimeProvider.GetUtcNow();
                 IsRunning = true;
@@ -267,7 +270,7 @@
 
                 LastSuccessDateUtc = LastEndDateUtc = m_DateTimeProvider.GetUtcNow();
 
-                AfterTaskEnded(this, new AfterTaskEndedEventArgs(TaskId, LastStartDateUtc, LastEndDateUtc));
+                TaskEnded(this, new AfterTaskEndedEventArgs(TaskId, LastStartDateUtc, LastEndDateUtc));
 
                 if (RunOnlyOnce)
                 {

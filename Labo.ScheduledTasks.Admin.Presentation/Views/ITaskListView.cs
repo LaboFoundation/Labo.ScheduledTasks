@@ -8,6 +8,10 @@
 
     public interface ITaskListView : IView<TaskListPresenter>
     {
-       IList<ScheduledTask> ScheduledTasks { set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1044:PropertiesShouldNotBeWriteOnly")]
+        IList<ScheduledTask> ScheduledTasks { set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1044:PropertiesShouldNotBeWriteOnly")]
+        bool TaskServiceRunning { set; }
     }
 }

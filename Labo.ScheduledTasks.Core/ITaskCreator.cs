@@ -1,7 +1,7 @@
 ﻿namespace Labo.ScheduledTasks.Core
 {
-    public interface ITaskCreator
+    public interface ITaskCreator : ITaskCreatorInfo
     {
-        ITask CreateTask(string taskName);
+        ITask CreateTask(string taskConfiguration);
     }
 }

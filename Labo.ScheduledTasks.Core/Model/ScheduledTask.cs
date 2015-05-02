@@ -19,14 +19,31 @@ namespace Labo.ScheduledTasks.Core.Model
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets the description.
+        /// </summary>
+        /// <value>
+        /// The description.
+        /// </value>
+        public string Description { get; set; }
+
+        /// <summary>
         /// Gets or sets the run period (in seconds)
         /// </summary>
         public int Seconds { get; set; }
 
         /// <summary>
-        /// Gets or sets the type of appropriate ITask class
+        /// Gets or sets the type of task
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods")]
         public string Type { get; set; }
+
+        /// <summary>
+        /// Gets or sets the task configuration.
+        /// </summary>
+        /// <value>
+        /// The task configuration.
+        /// </value>
+        public string Configuration { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether a task is enabled
@@ -69,5 +86,34 @@ namespace Labo.ScheduledTasks.Core.Model
         /// The last success UTC.
         /// </value>
         public DateTime? LastSuccessUtc { get; set; }
+
+        public DateTime? LastStartDate 
+        {
+            get
+            {
+                return ToLocalDate(LastStartUtc);
+            } 
+        }
+
+        public DateTime? LastEndDate
+        {
+            get
+            {
+                return ToLocalDate(LastEndUtc);
+            }
+        }
+
+        public DateTime? LastSuccessDate
+        {
+            get
+            {
+                return ToLocalDate(LastSuccessUtc);
+            }
+        }
+
+        private static DateTime? ToLocalDate(DateTime? utc)
+        {
+            return utc.HasValue ? utc.Value.ToLocalTime() : utc;
+        }
     }
 }

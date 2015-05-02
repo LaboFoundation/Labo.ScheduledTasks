@@ -4,13 +4,14 @@
     using System.Collections.Generic;
 
     using Labo.ScheduledTasks.Core.EventArgs;
+    using Labo.ScheduledTasks.Core.Exceptions;
     using Labo.ScheduledTasks.Core.Model;
 
     public sealed class TaskService : ITaskService
     {
         private readonly IScheduledTaskStorage m_ScheduledTaskStorage;
 
-        private readonly ITaskCreator m_TaskCreator;
+        private readonly ITaskCreatorManager m_TaskCreatorManager;
 
         private readonly ITaskManagerFactory m_TaskManagerFactory;
 
@@ -18,16 +19,40 @@
 
         private bool m_Disposed;
 
-        public TaskService(IScheduledTaskStorage scheduledTaskStorage, ITaskCreator taskCreator, ITaskManagerFactory taskManagerFactory)
+        /// <summary>
+        /// Gets a value indicating whether the task service [is running].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if the task service [is running]; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsRunning
+        {
+            get { return m_TaskManager != null && m_TaskManager.IsRunning; }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TaskService"/> class.
+        /// </summary>
+        /// <param name="scheduledTaskStorage">The scheduled task storage.</param>
+        /// <param name="taskCreatorManager">The task creator manager.</param>
+        /// <param name="taskManagerFactory">The task manager factory.</param>
+        /// <exception cref="System.ArgumentNullException">
+        /// scheduledTaskStorage
+        /// or
+        /// taskCreatorManager
+        /// or
+        /// taskManagerFactory
+        /// </exception>
+        public TaskService(IScheduledTaskStorage scheduledTaskStorage, ITaskCreatorManager taskCreatorManager, ITaskManagerFactory taskManagerFactory)
         {
             if (scheduledTaskStorage == null)
             {
                 throw new ArgumentNullException("scheduledTaskStorage");
             }
 
-            if (taskCreator == null)
+            if (taskCreatorManager == null)
             {
-                throw new ArgumentNullException("taskCreator");
+                throw new ArgumentNullException("taskCreatorManager");
             }
 
             if (taskManagerFactory == null)
@@ -36,7 +61,7 @@
             }
 
             m_ScheduledTaskStorage = scheduledTaskStorage;
-            m_TaskCreator = taskCreator;
+            m_TaskCreatorManager = taskCreatorManager;
             m_TaskManagerFactory = taskManagerFactory;
         }
 
@@ -48,18 +73,33 @@
             Dispose(false);
         }
 
+        /// <summary>
+        /// Starts the task service.
+        /// </summary>
         public void Start()
         {
-            IList<TaskDefinition> taskDefinitions = GetTaskDefinitions();
+            if (m_TaskManager == null)
+            {
+                IList<TaskDefinition> taskDefinitions = GetTaskDefinitions();
 
-            m_TaskManager = m_TaskManagerFactory.CreateTaskManager(taskDefinitions);
+                m_TaskManager = m_TaskManagerFactory.CreateTaskManager(taskDefinitions);
 
-            m_TaskManager.AfterTaskEnded += TaskManagerAfterTaskEnded;
-            m_TaskManager.OnTaskError += TaskManagerOnTaskError;
+                m_TaskManager.TaskStarting += TaskManagerBeforeTaskStarted;
+                m_TaskManager.TaskEnded += TaskManagerAfterTaskEnded;
+                m_TaskManager.OnTaskError += TaskManagerOnTaskError;
+            }
+
+            if (m_TaskManager.IsRunning)
+            {
+                throw new ScheduledTasksException("Task service is already running.");
+            }
 
             m_TaskManager.Start();
         }
 
+        /// <summary>
+        /// Stops the task service.
+        /// </summary>
         public void Stop()
         {
             m_TaskManager.Stop();
@@ -83,11 +123,16 @@
             for (int i = 0; i < scheduleTasks.Count; i++)
             {
                 ScheduledTask scheduleTask = scheduleTasks[i];
-                ITask task = m_TaskCreator.CreateTask(scheduleTask.Type);
+                ITask task = m_TaskCreatorManager.CreateTask(scheduleTask.Configuration);
                 taskDefinitions.Add(new TaskDefinition(task, new TaskCofiguration(scheduleTask.Id, scheduleTask.Name, scheduleTask.Seconds, scheduleTask.StopOnError, scheduleTask.Enabled, scheduleTask.RunOnlyOnce)));
             }
 
             return taskDefinitions;
+        }
+
+        private void TaskManagerBeforeTaskStarted(object sender, BeforeTaskStartedEventArgs e)
+        {
+            m_ScheduledTaskStorage.UpdateStartDate(e.TaskId, e.SignalTime.ToUniversalTime());
         }
 
         private void TaskManagerOnTaskError(object sender, OnTaskErrorEventArgs e)

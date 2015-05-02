@@ -30,6 +30,7 @@
         /// <summary>
         /// Stops the timer.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Stop")]
         void Stop();
     }
 }
