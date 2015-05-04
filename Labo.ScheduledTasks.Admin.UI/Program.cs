@@ -80,6 +80,7 @@
             viewManager.RegisterView<ITaskListView, TaskListForm>("TaskList", "Task List");
             viewManager.RegisterView<IStartProcessTaskCreatorConfigurationView, StartProcessTaskCreatorConfigurationForm>("StartProcessTaskConfiguration", "Start Process Task Configuration");
             viewManager.RegisterView<IReflectionTaskCreatorConfigurationView, ReflectionTaskCreatorConfigurationForm>("ReflectionTaskConfiguration", "Reflection Task Configuration");
+            viewManager.RegisterView<IBuiltInTaskConfigurationView, BuiltInTaskConfigurationForm>("BuiltInTaskConfiguration", "Built-in Task Configuration");
         }
     }
 }

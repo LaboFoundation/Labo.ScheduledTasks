@@ -25,10 +25,10 @@
         {
             View.Configuration = GenerateConfigurationString();
 
-            IEditTaskView editTaskView = View.ParentView as IEditTaskView;
-            if (editTaskView != null)
+            ITaskCreatorConfigurationView taskCreatorConfigurationView = View.ParentView as ITaskCreatorConfigurationView;
+            if (taskCreatorConfigurationView != null)
             {
-                editTaskView.TaskConfiguration = View.Configuration;
+                taskCreatorConfigurationView.Configuration = View.Configuration;
             }
 
             Navigator.CloseView(View);

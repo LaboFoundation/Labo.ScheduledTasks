@@ -1,9 +1,9 @@
 ﻿namespace Labo.ScheduledTasks.Core.Presentation.Configuration
 {
-    using Labo.ScheduledTasks.Core.Presentation.Configuration.Views;
+    using Labo.Mvp.Core.View;
 
     public interface ITaskCreatorConfigurationViewFactory
     {
-        void OpenView(IEditTaskView parentView, string taskType, string configuration);
+        void OpenView(IView parentView, string taskType, string configuration);
     }
 }

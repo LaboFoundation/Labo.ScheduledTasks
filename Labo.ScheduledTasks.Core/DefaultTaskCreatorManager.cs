@@ -13,6 +13,8 @@
     {
         private readonly SortedList<string, ITaskCreator> m_TaskCreators;
 
+        private static readonly BuiltInTaskCreator s_BuiltInTaskCreator = new BuiltInTaskCreator(new DefaultBuiltInTaskFactory());
+
         public DefaultTaskCreatorManager()
             : this(GetDefaultTaskCreators())
         {
@@ -66,7 +68,7 @@
         {
             return new ITaskCreator[]
                        {
-                           new BuiltInTaskCreator(new DefaultBuiltInTaskFactory()), 
+                           s_BuiltInTaskCreator, 
                            new ReflectionTaskCreator()
                        };
         }
@@ -74,6 +76,11 @@
         public IList<ITaskCreatorInfo> GetTaskCreatorInfos()
         {
             return m_TaskCreators.Values.Cast<ITaskCreatorInfo>().ToList();
+        }
+
+        public IList<ITaskCreatorInfo> GetBuiltInTaskCreatorInfos()
+        {
+            return s_BuiltInTaskCreator.GetTaskCreatorInfos();
         }
     }
 }

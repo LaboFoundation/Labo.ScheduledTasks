@@ -56,12 +56,12 @@
             this.txtFile.Location = new System.Drawing.Point(84, 6);
             this.txtFile.Name = "txtFile";
             this.txtFile.ReadOnly = true;
-            this.txtFile.Size = new System.Drawing.Size(199, 20);
+            this.txtFile.Size = new System.Drawing.Size(225, 20);
             this.txtFile.TabIndex = 1;
             // 
             // btnSelectFile
             // 
-            this.btnSelectFile.Location = new System.Drawing.Point(289, 4);
+            this.btnSelectFile.Location = new System.Drawing.Point(315, 4);
             this.btnSelectFile.Name = "btnSelectFile";
             this.btnSelectFile.Size = new System.Drawing.Size(45, 23);
             this.btnSelectFile.TabIndex = 2;

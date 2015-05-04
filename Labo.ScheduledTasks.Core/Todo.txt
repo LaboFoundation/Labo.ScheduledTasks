@@ -1,6 +1,7 @@
-﻿1- use the taskcontext as a parameter of run method of the itask interface
-0- unit tests
-1- built-in task admin
-2- dll import feature
-3- wcf service
-4- windows service
+﻿- use the taskcontext as a parameter of run method of the itask interface
+- unit tests
+- ui validation
+- built-in task admin
+- dll import feature
+- wcf service
+- windows service

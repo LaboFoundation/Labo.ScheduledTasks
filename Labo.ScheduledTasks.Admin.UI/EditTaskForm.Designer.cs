@@ -42,6 +42,7 @@
             this.cbxTaskTypes = new System.Windows.Forms.ComboBox();
             this.txtConfiguration = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnChangeType = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudSeconds)).BeginInit();
             this.SuspendLayout();
             // 
@@ -190,11 +191,22 @@
             this.label2.TabIndex = 17;
             this.label2.Text = "Configuration:";
             // 
+            // btnChangeType
+            // 
+            this.btnChangeType.Location = new System.Drawing.Point(308, 95);
+            this.btnChangeType.Name = "btnChangeType";
+            this.btnChangeType.Size = new System.Drawing.Size(75, 23);
+            this.btnChangeType.TabIndex = 18;
+            this.btnChangeType.Text = "Change";
+            this.btnChangeType.UseVisualStyleBackColor = true;
+            this.btnChangeType.Click += new System.EventHandler(this.btnChangeType_Click);
+            // 
             // EditTaskForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(468, 288);
+            this.Controls.Add(this.btnChangeType);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtConfiguration);
             this.Controls.Add(this.cbxTaskTypes);
@@ -235,5 +247,6 @@
         private System.Windows.Forms.ComboBox cbxTaskTypes;
         private System.Windows.Forms.TextBox txtConfiguration;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnChangeType;
     }
 }

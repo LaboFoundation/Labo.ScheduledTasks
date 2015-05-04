@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Globalization;
+    using System.Linq;
 
     using Labo.ScheduledTasks.Core.Exceptions;
 
@@ -46,6 +47,11 @@
             }
 
             throw new ScheduledTasksException(string.Format(CultureInfo.CurrentCulture, "'{0}' built-in task could not be found.", taskName));
+        }
+
+        public IList<ITaskCreatorInfo> GetTaskCreatorInfos()
+        {
+            return m_BuiltInTaskCreators.Values.Cast<ITaskCreatorInfo>().ToList();
         }
     }
 }

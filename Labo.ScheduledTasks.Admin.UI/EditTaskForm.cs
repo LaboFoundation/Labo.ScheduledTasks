@@ -14,7 +14,7 @@
     {
         private int m_TaskId;
 
-        private bool m_CbxTaskTypesEnabled;
+        private bool m_CbxTaskTypesEnabled = true;
 
         public EditTaskPresenter Presenter { get; set; }
 
@@ -70,6 +70,8 @@
                 if (!string.IsNullOrWhiteSpace(task.Type))
                 {
                     m_CbxTaskTypesEnabled = false;
+                    btnChangeType.Enabled = true;
+                    cbxTaskTypes.Enabled = false;
                     cbxTaskTypes.Text = task.Type;
                     m_CbxTaskTypesEnabled = true;                   
                 }
@@ -127,12 +129,27 @@
             }
         }
 
-        public string TaskConfiguration
+        public string Configuration
         {
+            get
+            {
+                return txtConfiguration.Text;
+            }
+
             set
             {
                 txtConfiguration.Text = value;
+                btnChangeType.Enabled = true;
+                cbxTaskTypes.Enabled = false;
             }
+        }
+
+        private void btnChangeType_Click(object sender, EventArgs e)
+        {
+            Configuration = string.Empty;
+            cbxTaskTypes.SelectedIndex = 0;
+            cbxTaskTypes.Enabled = true;
+            btnChangeType.Enabled = false;
         }
     }
 }

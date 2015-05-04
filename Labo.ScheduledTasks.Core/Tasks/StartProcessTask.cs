@@ -30,7 +30,7 @@
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "'{0}' file does not exists.", fileName));
             }
 
-            if (!Path.GetFileName(fileName).Equals(".exe", StringComparison.OrdinalIgnoreCase))
+            if (!Path.GetExtension(fileName).Equals(".exe", StringComparison.OrdinalIgnoreCase))
             {
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "'{0}' file is not an exe.", fileName));
             }

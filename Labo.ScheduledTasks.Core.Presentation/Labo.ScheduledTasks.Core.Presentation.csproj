@@ -58,13 +58,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\ITaskCreatorConfigurationViewFactory.cs" />
-    <Compile Include="Configuration\Presenters\EditTaskPresenter.cs" />
+    <Compile Include="Configuration\Presenters\BuiltInTaskConfigurationPresenter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\Presenters\EditTaskPresenter.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Configuration\Presenters\ITaskCreatorConfigurationPresenter.cs" />
     <Compile Include="Configuration\Presenters\ReflectionTaskCreatorConfigurationPresenter.cs" />
     <Compile Include="Configuration\Presenters\StartProcessTaskCreatorConfigurationPresenter.cs" />
     <Compile Include="Configuration\Presenters\TaskCreatorConfigurationPresenterBase.cs" />
     <Compile Include="Configuration\TaskCreatorConfigurationViewFactory.cs" />
-    <Compile Include="Configuration\Views\IEditTaskView.cs" />
+    <Compile Include="Configuration\Views\IBuiltInTaskConfigurationView.cs" />
+    <Compile Include="Configuration\Views\IEditTaskView.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Configuration\Views\IReflectionTaskCreatorConfigurationView.cs" />
     <Compile Include="Configuration\Views\ITaskCreatorConfigurationView.cs" />
     <Compile Include="Configuration\Views\IStartProcessTaskCreatorConfigurationView.cs" />

@@ -5,6 +5,7 @@
 
     using Labo.Mvp.Core.Navigator;
     using Labo.Mvp.Core.Presenter;
+    using Labo.Mvp.Core.View;
     using Labo.ScheduledTasks.Core.Exceptions;
     using Labo.ScheduledTasks.Core.Presentation.Configuration.Presenters;
     using Labo.ScheduledTasks.Core.Presentation.Configuration.Views;
@@ -29,9 +30,10 @@
 
             presenterFactory.RegisterPresenter<IStartProcessTaskCreatorConfigurationView, StartProcessTaskCreatorConfigurationPresenter>();
             presenterFactory.RegisterPresenter<IReflectionTaskCreatorConfigurationView, ReflectionTaskCreatorConfigurationPresenter>();
+            presenterFactory.RegisterPresenter<IBuiltInTaskConfigurationView, BuiltInTaskConfigurationPresenter>();
         }
 
-        public void OpenView(IEditTaskView parentView, string taskType, string configuration)
+        public void OpenView(IView parentView, string taskType, string configuration)
         {
             switch (taskType)
             {

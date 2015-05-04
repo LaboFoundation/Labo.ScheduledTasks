@@ -1,6 +1,7 @@
 ﻿namespace Labo.ScheduledTasks.Core
 {
     using System;
+    using System.Collections.Generic;
 
     using Labo.Common.Utils;
     using Labo.ScheduledTasks.Core.Tasks;
@@ -29,6 +30,11 @@
             BuiltInTaskConfiguration configuration = SerializationUtils.DeserializeXmlObject<BuiltInTaskConfiguration>(taskConfiguration);
 
             return m_BuiltInTaskFactory.CreateTask(configuration);
+        }
+
+        public IList<ITaskCreatorInfo> GetTaskCreatorInfos()
+        {
+            return m_BuiltInTaskFactory.GetTaskCreatorInfos();
         }
 
         public string Name
